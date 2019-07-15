@@ -1,0 +1,435 @@
+{
+    "pages": {
+        "inputs": {
+            "description": "Manage your data inputs", 
+            "table": {
+                "actions": [
+                    "edit", 
+                    "enable", 
+                    "delete", 
+                    "clone"
+                ], 
+                "moreInfo": [
+                    {
+                        "field": "name", 
+                        "label": "Name"
+                    }, 
+                    {
+                        "field": "interval", 
+                        "label": "Interval"
+                    }, 
+                    {
+                        "field": "index", 
+                        "label": "Index"
+                    }, 
+                    {
+                        "field": "disabled", 
+                        "label": "Status"
+                    }
+                ], 
+                "header": [
+                    {
+                        "field": "name", 
+                        "label": "Name"
+                    }, 
+                    {
+                        "field": "interval", 
+                        "label": "Interval"
+                    }, 
+                    {
+                        "field": "index", 
+                        "label": "Index"
+                    }, 
+                    {
+                        "field": "disabled", 
+                        "label": "Status"
+                    }
+                ]
+            }, 
+            "title": "Inputs", 
+            "services": [
+                {
+                    "entity": [
+                        {
+                            "field": "name", 
+                            "required": true, 
+                            "validators": [
+                                {
+                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores.", 
+                                    "type": "regex", 
+                                    "pattern": "^[a-zA-Z]\\w*$"
+                                }, 
+                                {
+                                    "maxLength": 100, 
+                                    "type": "string", 
+                                    "minLength": 1, 
+                                    "errorMsg": "Length of input name should be between 1 and 100"
+                                }
+                            ], 
+                            "label": "Name", 
+                            "type": "text", 
+                            "help": "Enter a unique name for the data input"
+                        }, 
+                        {
+                            "field": "interval", 
+                            "required": true, 
+                            "validators": [
+                                {
+                                    "errorMsg": "Interval must be an integer.", 
+                                    "type": "regex", 
+                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$"
+                                }
+                            ], 
+                            "label": "Interval", 
+                            "type": "text", 
+                            "help": "Time interval of input in seconds."
+                        }, 
+                        {
+                            "field": "index", 
+                            "required": true, 
+                            "validators": [
+                                {
+                                    "maxLength": 80, 
+                                    "type": "string", 
+                                    "minLength": 1, 
+                                    "errorMsg": "Length of index name should be between 1 and 80."
+                                }
+                            ], 
+                            "options": {
+                                "createSearchChoice": true, 
+                                "endpointUrl": "data/indexes", 
+                                "blackList": "^_.*$"
+                            }, 
+                            "defaultValue": "default", 
+                            "label": "Index", 
+                            "type": "singleSelect"
+                        }, 
+                        {
+                            "field": "aws_description_role_name", 
+                            "required": true, 
+                            "validators": [
+                                {
+                                    "maxLength": 8192, 
+                                    "type": "string", 
+                                    "minLength": 0, 
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ], 
+                            "label": "aws:description role name", 
+                            "type": "text", 
+                            "help": "This is the *name* of the role that will be assumed in each child account by the Splunk instance when configuring AWS Description data collection", 
+                            "options": {
+                                "placeholder": "rolename"
+                            }
+                        }
+                    ], 
+                    "title": "AWS Configurator Description", 
+                    "name": "aws_configurator_description"
+                },
+                {
+                    "entity": [
+                        {
+                            "field": "name",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores.",
+                                    "type": "regex",
+                                    "pattern": "^[a-zA-Z]\\w*$"
+                                },
+                                {
+                                    "maxLength": 100,
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "errorMsg": "Length of input name should be between 1 and 100"
+                                }
+                            ],
+                            "label": "Name",
+                            "type": "text",
+                            "help": "Enter a unique name for the data input"
+                        },
+                        {
+                            "field": "interval",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "errorMsg": "Interval must be an integer.",
+                                    "type": "regex",
+                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$"
+                                }
+                            ],
+                            "label": "Interval",
+                            "type": "text",
+                            "help": "Time interval of input in seconds."
+                        },
+                        {
+                            "field": "index",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "maxLength": 80,
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "errorMsg": "Length of index name should be between 1 and 80."
+                                }
+                            ],
+                            "options": {
+                                "createSearchChoice": true,
+                                "endpointUrl": "data/indexes",
+                                "blackList": "^_.*$"
+                            },
+                            "defaultValue": "default",
+                            "label": "Index",
+                            "type": "singleSelect"
+                        },
+                        {
+                            "field": "aws_cloudtrail_role_arn",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "maxLength": 8192,
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ],
+                            "label": "aws:cloudtrail role",
+                            "type": "text",
+                            "help": "This is the *arn* of the role that will be assumed in the audit account when configuring AWS Cloudtrail data collection",
+                            "options": {
+                                "placeholder": ""
+                            }
+                        },
+                        {
+                            "field": "aws_cloudtrail_sqs_url",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "maxLength": 8192,
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ],
+                            "label": "aws:cloudtrail SQS URL",
+                            "type": "text",
+                            "help": "This is the *url* of the SQS queue that contains the S3 notifications for cloudtrail",
+                            "options": {
+                                "placeholder": ""
+                            }
+                        },
+                        {
+                            "field": "aws_cloudtrail_sqs_region",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "maxLength": 8192,
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ],
+                            "label": "aws:cloudtrail SQS Region",
+                            "type": "text",
+                            "help": "This is the *region* of the SQS queue that contains the S3 notifications for cloudtrail",
+                            "options": {
+                                "placeholder": "eu-west-2"
+                            }
+                        }
+                    ],
+                    "title": "AWS Configurator Cloudtrail",
+                    "name": "aws_configurator_cloudtrail"
+                },
+                {
+                    "entity": [
+                        {
+                            "field": "name",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores.",
+                                    "type": "regex",
+                                    "pattern": "^[a-zA-Z]\\w*$"
+                                },
+                                {
+                                    "maxLength": 100,
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "errorMsg": "Length of input name should be between 1 and 100"
+                                }
+                            ],
+                            "label": "Name",
+                            "type": "text",
+                            "help": "Enter a unique name for the data input"
+                        },
+                        {
+                            "field": "interval",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "errorMsg": "Interval must be an integer.",
+                                    "type": "regex",
+                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$"
+                                }
+                            ],
+                            "label": "Interval",
+                            "type": "text",
+                            "help": "Time interval of input in seconds."
+                        },
+                        {
+                            "field": "index",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "maxLength": 80,
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "errorMsg": "Length of index name should be between 1 and 80."
+                                }
+                            ],
+                            "options": {
+                                "createSearchChoice": true,
+                                "endpointUrl": "data/indexes",
+                                "blackList": "^_.*$"
+                            },
+                            "defaultValue": "default",
+                            "label": "Index",
+                            "type": "singleSelect"
+                        },
+                        {
+                            "field": "aws_config_role_arn",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "maxLength": 8192,
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ],
+                            "label": "aws:config role",
+                            "type": "text",
+                            "help": "This is the *arn* of the role that will be assumed in the audit account when configuring AWS Config data collection",
+                            "options": {
+                                "placeholder": ""
+                            }
+                        },
+                        {
+                            "field": "aws_config_sqs_url",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "maxLength": 8192,
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ],
+                            "label": "aws:config SQS URL",
+                            "type": "text",
+                            "help": "This is the *url* of the SQS queue that contains the S3 notifications for config",
+                            "options": {
+                                "placeholder": ""
+                            }
+                        },
+                        {
+                            "field": "aws_config_sqs_region",
+                            "required": true,
+                            "validators": [
+                                {
+                                    "maxLength": 8192,
+                                    "type": "string",
+                                    "minLength": 0,
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ],
+                            "label": "aws:config SQS Region",
+                            "type": "text",
+                            "help": "This is the *region* of the SQS queue that contains the S3 notifications for config",
+                            "options": {
+                                "placeholder": "eu-west-2"
+                            }
+                        }
+                    ],
+                    "title": "AWS Configurator Config",
+                    "name": "aws_configurator_config"
+                }
+            ]
+        }, 
+        "configuration": {
+            "description": "Set up your add-on", 
+            "tabs": [
+                {
+                    "entity": [
+                        {
+                            "field": "loglevel", 
+                            "options": {
+                                "disableSearch": true, 
+                                "autoCompleteFields": [
+                                    {
+                                        "label": "DEBUG", 
+                                        "value": "DEBUG"
+                                    }, 
+                                    {
+                                        "label": "INFO", 
+                                        "value": "INFO"
+                                    }, 
+                                    {
+                                        "label": "WARNING", 
+                                        "value": "WARNING"
+                                    }, 
+                                    {
+                                        "label": "ERROR", 
+                                        "value": "ERROR"
+                                    }, 
+                                    {
+                                        "label": "CRITICAL", 
+                                        "value": "CRITICAL"
+                                    }
+                                ]
+                            }, 
+                            "label": "Log level", 
+                            "type": "singleSelect", 
+                            "defaultValue": "INFO"
+                        }
+                    ], 
+                    "title": "Logging", 
+                    "name": "logging"
+                }, 
+                {
+                    "entity": [
+                        {
+                            "field": "root_org_role_arn", 
+                            "required": true, 
+                            "validators": [
+                                {
+                                    "maxLength": 8192, 
+                                    "type": "string", 
+                                    "minLength": 0, 
+                                    "errorMsg": "Max length of text input is 8192"
+                                }
+                            ], 
+                            "defaultValue": "", 
+                            "label": "Root org role ARN", 
+                            "type": "text", 
+                            "help": "This role should be assumable from the Splunk instance and give access to read the organisations. ", 
+                            "options": {
+                                "placeholder": "arn:aws:iam::123456789012:role/rootOrgROAccess"
+                            }
+                        }
+                    ], 
+                    "title": "Add-on Settings", 
+                    "name": "additional_parameters"
+                }
+            ], 
+            "title": "Configuration"
+        }
+    }, 
+    "meta": {
+        "restRoot": "TA_aws_configurator", 
+        "displayName": "AWS Configurator", 
+        "version": "1.0.0", 
+        "name": "TA-aws-configurator", 
+        "apiVersion": "3.0.0"
+    }
+}
