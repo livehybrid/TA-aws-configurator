@@ -89,7 +89,6 @@ class aws_helper:
         else:
             message = 'No credentials have been found. Please set them up in your AWS console.'
             logger.warning(message, session_key, 'common.py')
-            sys.exit(0)
 
     def get_incremental_sqs_definitions(self):
         response = self.rest_client.get(
