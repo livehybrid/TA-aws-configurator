@@ -85,7 +85,7 @@ def collect_events(helper, ew):
             "account": "SplunkLoader-AWS",
             "aws_iam_role": cred_name,
             "regions": "ap-northeast-1,ap-northeast-2,ap-south-1,ap-southeast-1,ap-southeast-2,ca-central-1,eu-central-1,eu-west-1,eu-west-2,sa-east-1,us-east-1,us-east-2,us-west-1,us-west-2",
-            "apis": "ec2_volumes/42300,iec2_instances/42300,ec2_reserved_instances/42300,ebs_snapshots/42300,classic_load_balancers/42300,application_load_balancers/42300,vpcs/42300,vpc_network_acls/42300,vpc_subnets/42300,rds_instances/42300,ec2_key_pairs/42300,ec2_security_groups/42300,ec2_images/42300,ec2_addresses/42300,lambda_functions/42300,iam_users/3600",
+            "apis": "ec2_volumes/42300,ec2_instances/42300,ec2_reserved_instances/42300,ebs_snapshots/42300,classic_load_balancers/42300,application_load_balancers/42300,vpcs/42300,vpc_network_acls/42300,vpc_subnets/42300,rds_instances/42300,ec2_key_pairs/42300,ec2_security_groups/42300,ec2_images/42300,ec2_addresses/42300,lambda_functions/42300,iam_users/3600",
             "sourcetype": "aws:description",
             "index": helper.get_output_index()
         }
