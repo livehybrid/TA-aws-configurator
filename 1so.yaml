@@ -1,0 +1,26 @@
+version: "3.6"
+
+networks:
+  default:
+    name: global
+#  splunknet:
+#    driver: bridge
+#    attachable: true
+
+services:
+  so1:
+    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
+    hostname: awsconfigurator
+    labels:
+      - traefik.http.routers.awsconfigurator.tls=true
+      - traefik.http.services.awsconfigurator.loadbalancer.server.scheme=https
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=Chang3d!
+      - DEBUG=true
+      - SPLUNK_HTTP_ENABLESSL=true
+    ports:
+      - 8000
+      - 8089
+    volumes:
+      - /Users/williamsearle/projects/splunk/TA-aws-configurator:/opt/splunk/etc/apps/TA-aws-configurator

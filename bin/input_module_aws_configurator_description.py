@@ -8,7 +8,6 @@ import splunk.rest
 import splunk.entity as entity
 import splunklib.client as client
 import solnlib.splunk_rest_client as src
-import solnlib.utils as sutils
 
 import json
 
