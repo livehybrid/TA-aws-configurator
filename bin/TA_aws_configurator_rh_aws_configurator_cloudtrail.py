@@ -8,7 +8,7 @@ from splunktaucclib.rest_handler.endpoint import (
     DataInputModel,
 )
 from splunktaucclib.rest_handler import admin_external, util
-from splunk_aoblib.rest_migration import ConfigMigrationHandler
+from splunktaucclib.splunk_aoblib.rest_migration import ConfigMigrationHandler
 
 util.remove_http_proxy_env_vars()
 
@@ -78,6 +78,7 @@ model = RestModel(fields, name=None)
 endpoint = DataInputModel(
     'aws_configurator_cloudtrail',
     model,
+    app="TA-aws-configurator"
 )
 
 

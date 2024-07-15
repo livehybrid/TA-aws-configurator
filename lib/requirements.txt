@@ -1,0 +1,3 @@
+splunktaucclib
+boto3
+botocore
