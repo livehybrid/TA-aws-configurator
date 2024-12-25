@@ -1,0 +1,44 @@
+name: Splunk App CI/CD
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "v*.*.*"
+permissions:
+  pull-requests: write
+  actions: write
+  checks: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Package app
+        uses: livehybrid/deploy-splunk-app-action@main
+        with:
+          python-version: "3.9"
+
+  appinspect:
+    name: quality-appinspect
+    needs: package
+    uses: livehybrid/deploy-splunk-app-action/.github/workflows/appinspect-cli.yml@main
+    with:
+      tags: "cloud,future,private_victoria"
+    secrets:
+      token: "${{ secrets.GITHUB_TOKEN }}"
+
+  quality-appinspect-api:
+    name: quality-appinspect-api
+    needs:
+      - appinspect
+    uses: livehybrid/deploy-splunk-app-action/.github/workflows/appinspect-api.yml@main
+    secrets:
+      splunkbase_username: ${{ secrets.SPLUNKBASE_USERNAME }}
+      splunkbase_password: ${{ secrets.SPLUNKBASE_PASSWORD }}
+  
+  publish-gh:
+    permissions:
+      contents: write
+    needs:
+      - appinspect
+    uses: livehybrid/deploy-splunk-app-action/.github/workflows/publish.yml@main
